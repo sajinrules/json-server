@@ -1,3 +1,4 @@
+const fs = require('fs')
 const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
@@ -13,12 +14,8 @@ server.use('/api', router);
 
 const SECRET_KEY = '123456789'
 const expiresIn = '1h'
+const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
-var myLogger = function (req, res, next) {
-  console.log('LOGGED', req)
-  next()
-}
-// server.use(myLogger);
 // Create a token from a payload 
 function createToken(payload){
   return jwt.sign(payload, SECRET_KEY, {expiresIn})
