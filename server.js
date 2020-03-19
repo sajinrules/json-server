@@ -36,7 +36,8 @@ server.post('/auth/login', (req, res) => {
   if (isAuthenticated({email, password}) === false) {
     const status = 401
     const message = 'Incorrect email or password'
-    res.status(status).json({status, message})
+    const user = userdb.users.find(user => user.email === email && user.password === password)
+    res.status(status).json({status, message, user})
     return
   }
   const access_token = createToken({email, password})
