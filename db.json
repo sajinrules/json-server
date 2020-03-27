@@ -24,5 +24,22 @@
       "cost": 40.0,
       "quantity": 4000
   	}
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "bruno",
+      "email": "bruno@email.com"
+    },
+    {
+      "id": 2,
+      "name": "nilson",
+      "email": "nilson@email.com"
+    },
+    {
+      "id": 3,
+      "name": "Sajin",
+      "email": "sajin@email.com"
+    }
   ]
 }

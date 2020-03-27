@@ -33,15 +33,21 @@ function isAuthenticated({email, password}){
 
 server.post('/auth/login', (req, res) => {
   const {email, password} = req.body
+  console.log("email = password", {email, password});
+  console.log(userdb.users);
+  console.log('isAuthenticated({email, password}:', isAuthenticated({email, password}));
   if (isAuthenticated({email, password}) === false) {
     const status = 401
     const message = 'Incorrect email or password'
-    const user = userdb.users.find(user => user.email === email && user.password === password)
-    res.status(status).json({status, message, user})
+    
+    res.status(status).json({status, message})
     return
   }
+  const userLoggedIn = userdb.users.find(user => user.email === email && user.password === password)
+  let user =  Object.assign({}, userLoggedIn);
+  delete user.password;
   const access_token = createToken({email, password})
-  res.status(200).json({access_token})
+  res.status(200).json({access_token, user})
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
